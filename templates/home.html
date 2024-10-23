@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Recommendations</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Content-Based Job Recommendations</h1>
+        <form method="POST" action="/get_jobs_content_based" class="mt-4">
+            <div class="mb-3">
+                <label for="jobTitle" class="form-label">Enter Job Title</label>
+                <input type="text" class="form-control" id="jobTitle" name="job_title" placeholder="e.g. EXPERIENCED ROOFERS" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Get Recommendations</button>
+        </form>
+
+        {% if recommendations %}
+        <div class="mt-5">
+            <h2>Recommended Jobs</h2>
+            <ul class="list-group">
+                {% for job in recommendations %}
+                <li class="list-group-item">
+                    <strong>{{ job['Title'] }}</strong><br>
+                    <span>{{ job['Description'] }}</span><br>
+                    <small>{{ job['City'] }}, {{ job['State'] }}</small>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
